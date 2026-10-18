@@ -1,33 +1,3 @@
-/**
- * STA STUDENT PORTAL - SHARED APPLICATION STATE
- */
-var currentQuestions = window.currentQuestions = window.currentQuestions || [];
-var currentQuestionIndex = window.currentQuestionIndex = window.currentQuestionIndex || 0;
-var userAnswers = window.userAnswers = window.userAnswers || [];
-var timeLeft = window.timeLeft = window.timeLeft || 5400; // 90 mins
-var timerInterval = window.timerInterval = window.timerInterval || null;
-var violationCount = window.violationCount = window.violationCount || 0;
-var lastViolationTime = window.lastViolationTime = window.lastViolationTime || 0;
-var isShowingConfirmDialog = window.isShowingConfirmDialog = window.isShowingConfirmDialog || false;
-var isSubmitting = window.isSubmitting = window.isSubmitting || false;
-
-var assignedExamData = window.assignedExamData = window.assignedExamData || null;
-var homeworkData = window.homeworkData = window.homeworkData || null;
-var hasExam = window.hasExam = window.hasExam || false;
-var hasHomework = window.hasHomework = window.hasHomework || false;
-var examActive = window.examActive = window.examActive || false;
-var activeExamId = window.activeExamId = window.activeExamId || null;
-var activeHomeworkId = window.activeHomeworkId = window.activeHomeworkId || null;
-
-var hwQuestions = window.hwQuestions = window.hwQuestions || [];
-var hwCurrentIndex = window.hwCurrentIndex = window.hwCurrentIndex || 0;
-var hwAnswers = window.hwAnswers = window.hwAnswers || [];
-var hwDocId = window.hwDocId = window.hwDocId || '';
-var hwDocTitle = window.hwDocTitle = window.hwDocTitle || '';
-var hwDuration = window.hwDuration = window.hwDuration || 90;
-var hwTimeLeft = window.hwTimeLeft = window.hwTimeLeft || 5400;
-var hwTimerInterval = window.hwTimerInterval = window.hwTimerInterval || null;
-
 function startExam() {
     violationCount = 0;
     document.getElementById('instruction-section').style.display = 'none';
@@ -94,9 +64,7 @@ function loadQuestion() {
     document.getElementById('next-btn').innerText = currentQuestionIndex === (currentQuestions.length - 1) ? "FINISH" : "NEXT";
 }
 
-
-
-let isSubmitting = false;
+var isSubmitting = false;
 
 function safeConfirmSubmit(message, onConfirm) {
     isShowingConfirmDialog = true;
@@ -136,7 +104,7 @@ function prevQuestion() {
 }
 
 // ===============================
-// 📊 FIX: PREVENTING "UNDEFINED" IN REPORT & SAFE SUBMISSION
+// 🎯 FIX: PREVENTING "UNDEFINED" IN REPORT & SAFE SUBMISSION
 // ===============================
 function calculateFinalScore() {
     if (isSubmitting) return;
@@ -205,7 +173,7 @@ function calculateFinalScore() {
 
         if (statusLabel) {
             if (finalPercent >= 70) {
-                statusLabel.innerText = "✅ PASSED";
+                statusLabel.innerText = "🎉 PASSED";
                 statusLabel.style.color = "#28a745";
             } else {
                 statusLabel.innerText = "❌ FAILED";
@@ -223,11 +191,3 @@ function calculateFinalScore() {
         if (rSection) rSection.style.display = 'block';
     }
 }
-
-// ===============================
-// 🚨 ANTI-CHEAT SYSTEM (EXAM & ASSIGNMENT / HOMEWORK)
-// ===============================
-
-let lastViolationTime = 0;
-let isShowingConfirmDialog = false;
-
